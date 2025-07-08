@@ -1,0 +1,20 @@
+<h1>Editing Category</h1>
+
+<%= form_with(model: @category) do |form| %>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :details %>
+    <%= form.text_area :details, rows: 4 %>
+  </div>
+
+  <div>
+    <%= form.submit "Update Category" %>
+  </div>
+<% end %>
+
+<%= link_to 'Show', @category %> |
+<%= link_to 'Back', categories_path %>

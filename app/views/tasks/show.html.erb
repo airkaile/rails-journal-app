@@ -1,0 +1,9 @@
+<h1><%= @task.title %></h1>
+
+<p><strong>Description:</strong> <%= @task.description %></p>
+<p><strong>Due Date:</strong> <%= @task.due_date %></p>
+<p><strong>Status:</strong> <%= @task.completed ? 'Completed' : 'Pending' %></p>
+<p><strong>Category:</strong> <%= link_to @task.category.title, @task.category %></p>
+
+<%= link_to 'Edit', edit_category_task_path(@task.category, @task), class: 'btn' %>
+<%= link_to 'Back', category_path(@task.category), class: 'btn' %>

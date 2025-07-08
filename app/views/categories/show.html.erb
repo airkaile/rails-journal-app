@@ -1,0 +1,26 @@
+<h1><%= @category.title %></h1>
+
+<% if @category.details.present? %>
+  <div class="category-details">
+    <h3>Details:</h3>
+    <p><%= @category.details %></p>
+  </div>
+<% end %>
+
+<h2>Tasks in this category</h2>
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <%= link_to task.title, [@category, task] %>
+      (Due: <%= task.due_date %>)
+      <%= task.completed ? '✓' : '⌛' %>
+      <%= link_to 'Edit', edit_category_task_path(@category, task) %>
+      <%= link_to 'Delete', [@category, task], 
+                  data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'New Task', new_category_task_path(@category), class: 'btn' %>
+<%= link_to 'Edit Category', edit_category_path(@category), class: 'btn' %>
+<%= link_to 'Back', categories_path, class: 'btn' %>

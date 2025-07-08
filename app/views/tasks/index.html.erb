@@ -1,0 +1,24 @@
+<h1>Today's Tasks</h1>
+
+<% if @tasks.any? %>
+  <ul class="task-list">
+    <% @tasks.each do |task| %>
+      <li>
+        <strong><%= task.category.title %>:</strong>
+        <%= link_to task.title, [task.category, task] %>
+        (Due: <%= task.due_date %>)
+        <%= task.completed ? '✓' : '⌛' %>
+        <%= link_to 'Edit', edit_category_task_path(task.category, task) %>
+        <%= link_to 'Delete', [task.category, task], 
+                    data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No tasks due today.</p>
+<% end %>
+
+<% if current_user.categories.any? %>
+  <%= link_to 'Add New Task', new_category_task_path(current_user.categories.first), class: 'btn' %>
+<% end %>
+<%= link_to 'View All Categories', categories_path, class: 'btn' %>
