@@ -1,0 +1,37 @@
+<%= form_with(model: @category) do |f| %>
+  <% if @category.errors.any? %>
+    <div class="error-explanation">
+      <h3>Oops! Please fix these errors:</h3>
+      <ul>
+        <% @category.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field <%= 'field-with-errors' if @category.errors[:title].any? %>">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <% @category.errors.full_messages_for(:title).each do |msg| %>
+      <div class="field-error">
+        <%= msg %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field <%= 'field-with-errors' if @category.errors[:details].any? %>">
+    <%= f.label :details %>
+    <%= f.text_area :details, rows: 4 %>
+    <% @category.errors.full_messages_for(:details).each do |msg| %>
+      <div class="field-error">
+        <%= msg %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+    <%= link_to "Cancel", @category.persisted? ? @category : categories_path %>
+  </div>
+<% end %>
