@@ -1,7 +1,7 @@
 work_task:
   title: "Complete project"
   description: "Finish important project"
-  due_date: 2025-07-10
+  due_date: <%= Time.zone.today %>
   completed: false
   user: user_one
   category: work_category
@@ -11,7 +11,7 @@ work_task:
 personal_task:
   title: "Buy groceries"
   description: "Milk and eggs"
-  due_date: 2025-07-11
+  due_date: <%= Time.zone.tomorrow %>
   completed: true
   user: user_one
   category: personal_category
