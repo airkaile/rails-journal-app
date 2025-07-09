@@ -1,24 +1,33 @@
-<h1>Today's Tasks</h1>
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Today's Tasks</h1>
 
-<% if @tasks.any? %>
-  <ul class="task-list">
-    <% @tasks.each do |task| %>
-      <li>
-        <strong><%= task.category.title %>:</strong>
-        <%= link_to task.title, [task.category, task] %>
-        (Due: <%= task.due_date %>)
-        <%= task.completed ? '✓' : '⌛' %>
-        <%= link_to 'Edit', edit_category_task_path(task.category, task) %>
-        <%= link_to 'Delete', [task.category, task], 
-                    data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No tasks due today.</p>
-<% end %>
-
-<% if current_user.categories.any? %>
-  <%= link_to 'Add New Task', new_category_task_path(current_user.categories.first), class: 'btn' %>
-<% end %>
-<%= link_to 'View All Categories', categories_path, class: 'btn' %>
+  <% if @tasks.any? %>
+    <div class="card">
+      <ul class="task-list">
+        <% @tasks.each do |task| %>
+          <li>
+            <span class="<%= task.completed ? 'status-completed' : 'status-pending' %>">
+              <%= task.completed ? '✓' : '⌛' %>
+            </span>
+            <strong><%= task.category.title %>:</strong>
+            <%= link_to task.title, [task.category, task] %>
+            <span class="text-muted">(Due: <%= task.due_date %>)</span>
+            <div class="ms-auto btn-group">
+              <%= link_to 'Edit', edit_category_task_path(task.category, task), class: 'btn btn-sm btn-outline-secondary' %>
+              <%= button_to 'Delete', [task.category, task], 
+                  method: :delete,
+                  form_class: 'delete-form',
+                  data: { turbo_confirm: 'Are you sure?' },
+                  class: 'btn btn-sm btn-outline-danger delete-btn' %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <div class="card text-center py-4">
+      <p class="text-muted mb-3">No tasks due today! Wohoo!</p>
+    </div>
+  <% end %>
+</div>

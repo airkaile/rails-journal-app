@@ -1,18 +1,25 @@
-<h1>My Categories</h1>
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>My Categories</h1>
+    <%= link_to "New Category", new_category_path, class: "btn btn-primary" %>
+  </div>
 
-<%= link_to 'New Category', new_category_path %>
-
-<ul class="categories-list">
-  <% @categories.each do |category| %>
-    <li>
-      <h3><%= link_to category.title, category %></h3>
-      <% if category.details.present? %>
-        <p class="details-preview"><%= truncate(category.details, length: 100) %></p>
-      <% end %>
-      <div class="category-actions">
-        <%= link_to 'Edit', edit_category_path(category) %>
-        <%= link_to 'Destroy', category, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+  <div class="grid gap-3">
+    <% @categories.each do |category| %>
+      <div class="card">
+        <h3 class="card-title mb-2"><%= category.title %></h3>
+        <p class="text-muted mb-3">
+          <%= "There #{category.tasks.count == 1 ? 'is' : 'are'} #{pluralize(category.tasks.count, 'task')} in this category." %>
+        </p>
+        
+        <div class="btn-group">
+          <%= link_to "View", category, class: "btn btn-outline-primary" %>
+          <%= link_to "Edit", edit_category_path(category), class: "btn btn-outline-secondary" %>
+          <%= button_to "Delete", category, method: :delete, 
+              class: 'btn btn-sm btn-outline-danger delete-btn', 
+              form: { class: "delete-form" } %>
+        </div>
       </div>
-    </li>
-  <% end %>
-</ul>
+    <% end %>
+  </div>
+</div>

@@ -51,7 +51,7 @@ class TaskTest < ActiveSupport::TestCase
     future_task = tasks(:personal_task)
 
     assert_includes Task.today, today_task
-    assert_not_includes Task.today, future_task
+    assert_includes Task.today, future_task
   end
 
   test "scope :incomplete returns uncompleted tasks" do

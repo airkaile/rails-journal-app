@@ -27,8 +27,8 @@
 
   <% if @task.persisted? %>
     <div class="field <%= 'field-with-errors' if @task.errors[:completed].any? %>">
-      <%= f.check_box :completed %>
       <%= f.label :completed %>
+      <%= f.check_box :completed %>
     </div>
   <% end %>
 
