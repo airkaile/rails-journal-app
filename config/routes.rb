@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   end
 
   get "/tasks/today", to: "tasks#today", as: "today_tasks"
+
+  match "*unmatched_route", to: "application#route_not_found", via: :all
 end

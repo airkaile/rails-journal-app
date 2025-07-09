@@ -4,13 +4,11 @@ class TasksController < ApplicationController
   before_action :set_task, only: [ :show, :edit, :update, :destroy ]
   before_action :set_categories, only: [ :edit, :update ]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :handle_task_not_found
+
   def today
-    if current_user.categories.none?
-      redirect_to categories_path, alert: "Please create a category first"
-    else
-      @tasks = current_user.tasks.today.incomplete
-      render :index # Explicitly render the index template
-    end
+    @tasks = current_user.tasks.today.incomplete
+    render :index
   end
 
   def show
@@ -49,6 +47,11 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def handle_task_not_found
+    logger.error "Task not found for user #{current_user.id}"
+    redirect_to today_tasks_path, alert: "Task not found or you don't have permission to access it"
+  end
 
   def require_categories
     if current_user.categories.none?
