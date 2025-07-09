@@ -1,9 +1,13 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+work_category:
+  title: "Work"
+  details: "Work related tasks"
+  user: user_one
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
-one:
-  title: MyString
-  user: one
-
-two:
-  title: MyString
-  user: two
+personal_category:
+  title: "Personal"
+  details: "Personal tasks"
+  user: user_one
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
