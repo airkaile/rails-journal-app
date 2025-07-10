@@ -7,7 +7,7 @@ class TaskTest < ActiveSupport::TestCase
     @task = Task.new(
       title: "Test Task #{SecureRandom.hex(4)}",
       description: "Test description",
-      due_date: Date.today,
+      due_date: Time.zone.today,
       completed: false,
       user: @user,
       category: @category

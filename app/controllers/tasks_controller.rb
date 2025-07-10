@@ -2,8 +2,7 @@ class TasksController < ApplicationController
   before_action :require_categories, only: [ :new, :create, :today ]
   before_action :set_category, only: [ :new, :create ]
   before_action :set_task, only: [ :show, :edit, :update, :destroy ]
-  before_action :set_categories, only: [ :edit, :update ]
-
+  
   rescue_from ActiveRecord::RecordNotFound, with: :handle_task_not_found
 
   def today
@@ -11,8 +10,7 @@ class TasksController < ApplicationController
     render :index
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @task = @category.tasks.build(user: current_user, due_date: Date.today)
@@ -65,10 +63,6 @@ class TasksController < ApplicationController
 
   def set_task
     @task = current_user.tasks.find(params[:id])
-  end
-
-  def set_categories
-    @categories = current_user.categories
   end
 
   def task_params

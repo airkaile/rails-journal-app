@@ -7,8 +7,8 @@
       <%= link_to "Categories", categories_path, class: "nav-link #{'active' if current_page?(categories_path)}" %>
       <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link" %>
     <% else %>
-      <%= link_to "Sign in", new_user_session_path, class: "nav-link #{'active' if current_page?(new_user_session_path)}" %>
-      <%= link_to "Sign up", new_user_registration_path, class: "nav-link #{'active' if current_page?(new_user_registration_path)}" %>
+      <%= link_to "Login", new_user_session_path, class: "nav-link #{'active' if current_page?(new_user_session_path)}" %>
+      <%= link_to "Register", new_user_registration_path, class: "nav-link #{'active' if current_page?(new_user_registration_path)}" %>
     <% end %>
   </div>
 </nav>
